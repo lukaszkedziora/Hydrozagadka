@@ -38,7 +38,7 @@ characters = {
         'titel': 'Informator ',
         'pictogram': '⚝',
         'position': {
-            'bord1': [6, 96]
+            'bord1': [3, 92]
         }
     }
 }
