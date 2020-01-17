@@ -1,54 +1,57 @@
+import util
+
+
 player = {
-    'bord': 'bord1',
+    'board': 'board1',
     'name': 'Kapitan AS'
 }
 
 characters = {
     'jola': {
-        'titel': 'Pani Jola',
+        'title': 'Pani Jola',
         'pictogram': '⚥',
         'position': {
-            'bord1': [16, 15]
+            'board1': [16, 15]
         }
     },
     'as': {
-        'titel': 'As',
+        'title': 'As',
         'pictogram': '@',
         'position': {
-            'bord1': [14, 13]
+            'board1': [14, 13]
         }
     },
     'agenci': {
-        'titel': 'Agent',
+        'title': 'Agent',
         'pictogram': '☭',
         'position': {
-            'bord1': [9, 90]
+            'board1': [9, 90]
         }
     },
     'kolega': {
-        'titel': 'Kolega Janusz',
+        'title': 'Kolega Janusz',
         'pictogram': '☉',
         'position': {
-            'bord1': [16, 11]
+            'board1': [16, 11]
         }
     },
     'informator': {
-        'titel': 'Informator ',
+        'title': 'Informator ',
         'pictogram': '⚝',
         'position': {
-            'bord1': [3, 92]
+            'board1': [3, 92]
         }
     }
 }
 
-bords = {
-    'bord1': {
-        'title': 'bord1',
+boards = {
+    'board1': {
+        'title': 'board1',
         'items': {'Parsolka': [5, 43, '☢'],
                   'Karma': [4, 43, '☠'],
                   'Kombinezon': [3, 43, '☂']
                 },
-        'file': 'bord1.txt',
+        'file': 'board1.txt',
         'river': {
             'start': 50,
             'width': 15,
@@ -60,7 +63,7 @@ bords = {
 }
 
 
-def create_board(file_name=bords[player['bord']]['file']):
+def create_board(file_name=boards[player['board']]['file']):
     with open(file_name, 'r') as file:
         result1 = []
         for line in file:
@@ -72,9 +75,23 @@ def create_board(file_name=bords[player['bord']]['file']):
 
 
 def put_player_on_board(result1):
-    for key in bords[player['bord']]['items']:
-        items_pictogram = bords[player['bord']]['items'][key][2]
-        result1[bords[player['bord']]['items'][key][0]][bords[player['bord']]['items'][key][1]] = items_pictogram
-    for i in range(len(bords[player['bord']]['characters'])):
-        result1[characters[bords[player['bord']]['characters'][i]]['position'][player['bord']][0]][characters[bords[player['bord']]['characters'][i]]['position'][player['bord']][1]] = characters[bords[player['bord']]['characters'][i]]['pictogram']
+    for key in boards[player['board']]['items']:
+        items_pictogram = boards[player['board']]['items'][key][2]
+        result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] = items_pictogram
+    for i in range(len(boards[player['board']]['characters'])):
+        result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
+            [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
+            = characters[boards[player['board']]['characters'][i]]['pictogram']
     return result1
+
+
+def wsad(key):  
+    if key == "w":
+        characters[boards[player['board']]['characters'][1]]['position'][player['board']][0] -= 1
+    elif key == "a":
+        characters[boards[player['board']]['characters'][1]]['position'][player['board']][1] -= 1
+    elif key == "s":
+        characters[boards[player['board']]['characters'][1]]['position'][player['board']][0] += 1
+    elif key == "d":
+        characters[boards[player['board']]['characters'][1]]['position'][player['board']][1] += 1
+
