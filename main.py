@@ -22,15 +22,16 @@ def create_player():
     pass
 
 
-def main():
+def main(): 
     player = create_player()
-    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
+    board = engine.create_board()
 
     # util.clear_screen()
     is_running = True
     while is_running:
-        engine.put_player_on_board(board, player)
-        ui.display_board("board1.txt")   #### jak zaimportowac slownik
+        engine.put_player_on_board(board)
+        ui.display_board(board)
+        # ui.display_board("board1.txt")   #### jak zaimportowac slownik
         # ui.display_board(ui.boards[player['board']]['file'])
 
         key = util.key_pressed()
