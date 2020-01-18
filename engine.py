@@ -104,9 +104,9 @@ def wsad(key, board):
 
 def is_move_possible(board, move):
     walls = ["|", "~"] 
-    if move[0] < 1 or move[0] >= len(board)-1:          # height
+    if move[0] < 1 or move[0] >= len(board)-1:          
         return False
-    if move[1] < 1 or move[1] >= len(board[0])-1:       # width
+    if move[1] < 1 or move[1] >= len(board[0])-1:      
         return False
     if board[move[0]][move[1]] in walls:
         return False
