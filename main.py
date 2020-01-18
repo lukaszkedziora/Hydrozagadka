@@ -24,21 +24,27 @@ def create_player():
 
 def main(): 
     player = create_player()
-    board = engine.create_board()
-
-    # util.clear_screen()
+    
+    util.clear_screen()
     is_running = True
     while is_running:
+        board = engine.create_board()
         engine.put_player_on_board(board)
         ui.display_board(board)
-        # ui.display_board("board1.txt")   #### jak zaimportowac slownik
-        # ui.display_board(ui.boards[player['board']]['file'])
+        # ui.display_board("board1.txt")   
+        # ui.display_board(ui.boards[player['board']]['file'])    #### jak zaimportowac slownik
 
         key = util.key_pressed()
         if key == 'q':
             is_running = False
-        if key == 'i':
-            print("dziala")
+        if key == "w":
+            engine.wsad(key)
+        if key == "a":
+            engine.wsad(key)
+        if key == "s":
+            engine.wsad(key)
+        if key == "d":
+            engine.wsad(key)                        
         else:
             pass                        #### wsad  keys? 
         util.clear_screen()

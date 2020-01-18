@@ -65,13 +65,13 @@ boards = {
 
 def create_board(file_name=boards[player['board']]['file']):
     with open(file_name, 'r') as file:
-        result1 = []
+        result2 = []
         for line in file:
             result = []
             for sign in line:
                 result.append(sign)
-            result1.append(result)
-    return result1
+            result2.append(result)
+    return result2
 
 
 def put_player_on_board(result1):
@@ -79,13 +79,11 @@ def put_player_on_board(result1):
         items_pictogram = boards[player['board']]['items'][key][2]
         result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] = items_pictogram
     for i in range(len(boards[player['board']]['characters'])):
-        result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
-            [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
-            = characters[boards[player['board']]['characters'][i]]['pictogram']
+        result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]][characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] = characters[boards[player['board']]['characters'][i]]['pictogram']
     return result1
 
 
-def wsad(key):  
+def wsad(key):    
     if key == "w":
         characters[boards[player['board']]['characters'][1]]['position'][player['board']][0] -= 1
     elif key == "a":
@@ -94,4 +92,3 @@ def wsad(key):
         characters[boards[player['board']]['characters'][1]]['position'][player['board']][0] += 1
     elif key == "d":
         characters[boards[player['board']]['characters'][1]]['position'][player['board']][1] += 1
-
