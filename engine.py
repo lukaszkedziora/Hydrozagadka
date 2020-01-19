@@ -2,9 +2,8 @@ player = {
     'board': 'board1',
     'name': 'Kapitan AS',
     'player name': '',
-    'position': [], # characters[boards[player['board']]['characters'][1]]['position'][player['board']],
     'health': 100,
-    'inventory': ["umbrella", "key"]
+    'inventory': "test"                          # to do: add inventory
 }
 
 
@@ -108,7 +107,7 @@ def put_player_on_board(result1):
 
 
 def wsad(key, board):      
-    player_position = characters[boards[player['board']]['characters'][1]]['position'][player['board']]     # starting position in dictionary
+    player_position = characters[boards[player['board']]['characters'][0]]['position'][player['board']]     # starting position in dictionary
     next_move = player_position.copy()                      # copy of player position that will be modified
     if key == "w":
         next_move[0] -= 1
@@ -124,30 +123,26 @@ def wsad(key, board):
 
 
 def is_move_possible(board, move):
-    walls = ["|", "~", "█"] 
-    if move[0] < 1 or move[0] >= len(board)-1:          
+    walls = ["|", "~", "█", "^"] 
+    if move[0] < 1 or move[0] >= len(board)-1:              # is move in range height
         return False
-    if move[1] < 1 or move[1] >= len(board[0])-1:           # is move in range height
+    if move[1] < 1 or move[1] >= len(board[0])-1:           # is move in range width
         return False
     if board[move[0]][move[1]] in walls:                    # is move blocked by a wall
         return False
     return True
 
 def is_item(board, move):
-    items = ["*"]                                           # boards[player['board']]['items']
+    items = []                                              # boards[player['board']]['items']
     if board[move[0]][move[1]] in items:
-        pass                                                # add item to inventory
+        pass                                                # to do: add item to inventory
 
-def print_message(message):
-    print(message)
-
-message = "Dzien dobry"
 
 def display_player_stats():
-    # message = dialogs()
+    
     print()
     print("+--------+", '{:>95}'.format('Messages:'))
-    print("|    ___ |  Player name: ", player['player name'], '{:>50}'.format(message))
+    print("|    ___ |  Player name: ", player['player name'], '{:>50}'.format("test message"))      # to do: add messages if needed
     print("|   /   ||  Level: ", player['board'])
     print("|  / /| ||  Health: ", player['health'])
     print("| / ___ ||")
@@ -178,5 +173,4 @@ def dialogue():
                         break    
         i = i + 1
 
-# dialogs()
-# display_player_stats()
+
