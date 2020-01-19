@@ -1,6 +1,3 @@
-import util
-import engine
-
 player = {
     'board': 'board1',
     'name': 'Kapitan AS'
@@ -12,13 +9,29 @@ characters = {
         'pictogram': '⚥',
         'position': {
             'board1': [16, 15]
-        }
+        },
+        'dialogs': {
+            1: 'Cześć Janku..',
+            2: 'Piękna pogoda prawda?',
+            3: 'Może dlatego w całym mieście prakuje wody',
+            4: 'Dlaczego miałbyś wiedzieć to zadanie dla As, a nie takiego Pana Janka..',
+            5: 'Spytaj Janusza',
+        },
     },
     'as': {
         'title': 'As',
         'pictogram': '@',
         'position': {
-            'board1': [14, 13]
+            'board1': [14, 15]
+        },
+        'dialogs': {
+            'jola': {
+                1: 'Cześć Jolu!',
+                2: 'Straszna spiekota',
+                3: 'Jak to brakuje wody, nic o tym nie wiem!',
+                4: 'Gdzie mogę dowiedzieć się więcej?',
+                5: 'Dziękuję!'
+            }
         }
     },
     'agenci': {
@@ -58,7 +71,7 @@ boards = {
             'in': '*',
             'out': '/'
         },
-        'characters': ['jola', 'as', 'agenci', 'kolega', 'informator']
+        'characters': ['as', 'jola', 'agenci', 'kolega', 'informator']
     }
 }
 
@@ -87,7 +100,7 @@ def put_player_on_board(result1):
 
 
 def wsad(key, board):      
-    player_position = characters[boards[player['board']]['characters'][1]]['position'][player['board']]
+    player_position = characters[boards[player['board']]['characters'][0]]['position'][player['board']]
     next_move = player_position.copy()
     if key == "w":
         next_move[0] -= 1
@@ -103,7 +116,7 @@ def wsad(key, board):
 
 
 def is_move_possible(board, move):
-    walls = ["|", "~"] 
+    walls = ["|", "~", "█"] 
     if move[0] < 1 or move[0] >= len(board)-1:          
         return False
     if move[1] < 1 or move[1] >= len(board[0])-1:      
@@ -112,8 +125,31 @@ def is_move_possible(board, move):
         return False
     return True
 
-def is_item(board, move):
-    items = ["*"] 
-    if board[move[0]][move[1]] in items:
-        pass                                            # add item to inventory
+#def is_item(board, move):
+#    items = ["*"] 
+#    if board[move[0]][move[1]] in items:
+#        pass                                            # add item to inventory
 
+
+def dialogs():
+    i = 1
+    #while i != len(boards[player['board']]['characters']):
+    if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
+        print(characters[boards[player['board']]['characters'][i]]['dialogs'][1])
+        is_running = True
+        x = 0
+        while is_running:
+            a = characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]][1+x]
+            key = input(f'Co chcesz zrobić? \n(a): {a} \n(q): wyjść \n')
+            if key == 'q':
+                is_running = False
+            elif key == 'a':
+                x = x + 1
+                if x <= 4:
+                    print(characters[boards[player['board']]['characters'][i]]['dialogs'][1+x])
+                else:
+                    break    
+        i = i + 1
+       
+
+#dialogs()
