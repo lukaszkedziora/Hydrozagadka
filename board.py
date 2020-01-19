@@ -3,5 +3,4 @@ def get_table_from_file(file_name):
         result = []
         for line in file:
             result.append(line)
-        print(*result)
     return result

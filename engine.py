@@ -1,6 +1,3 @@
-import util
-import engine
-
 player = {
     'board': 'board1',
     'name': 'Kapitan AS',
@@ -16,14 +13,30 @@ characters = {
         'title': 'Pani Jola',
         'pictogram': '⚥',
         'position': {
-            'board1': [16, 15]
-        }
+            'board1': [14, 15]
+        },
+        'dialogs': {
+            1: 'Cześć Janku..',
+            2: 'Piękna pogoda, prawda?',
+            3: 'Może dlatego w całym mieście brakuje wody',
+            4: 'Dlaczego miałbyś wiedzieć, to zadanie dla Asaaa, a nie takiego Pana Janka.. Uwielbiam Aaasa, ahhhh',
+            5: 'Spytaj meterologa Janusza',
+        },
     },
     'as': {
         'title': 'As',
         'pictogram': '@',
         'position': {
-            'board1': [14, 13]
+            'board1': [14, 15]
+        },
+        'dialogs': {
+            'jola': {
+                1: 'Cześć Jolu!',
+                2: 'Straszna spiekota',
+                3: 'Jak to brakuje wody, nic o tym nie wiem!',
+                4: 'Gdzie mogę dowiedzieć się więcej?',
+                5: 'Dziękuję!'
+            }
         }
     },
     'agenci': {
@@ -38,6 +51,9 @@ characters = {
         'pictogram': '☉',
         'position': {
             'board1': [16, 11]
+        },
+        'dialogs':{
+            1: 'Witaj Janku',
         }
     },
     'informator': {
@@ -63,7 +79,7 @@ boards = {
             'in': '*',
             'out': '/'
         },
-        'characters': ['jola', 'as', 'agenci', 'kolega', 'informator']
+        'characters': ['as', 'jola', 'agenci', 'kolega', 'informator']
     }
 }
 
@@ -108,8 +124,8 @@ def wsad(key, board):
 
 
 def is_move_possible(board, move):
-    walls = ["|", "~"] 
-    if move[0] < 1 or move[0] >= len(board)-1:              # is move in range width
+    walls = ["|", "~", "█"] 
+    if move[0] < 1 or move[0] >= len(board)-1:          
         return False
     if move[1] < 1 or move[1] >= len(board[0])-1:           # is move in range height
         return False
@@ -128,6 +144,7 @@ def print_message(message):
 message = "Dzien dobry"
 
 def display_player_stats():
+    # message = dialogs()
     print()
     print("+--------+", '{:>95}'.format('Messages:'))
     print("|    ___ |  Player name: ", player['player name'], '{:>50}'.format(message))
@@ -138,14 +155,27 @@ def display_player_stats():
     print("+--------+")
     print()
 
-def loose_health(amount, player):
-    for player_health in player:
-        player_health = player['health']
-        current_health = player_health - amount
-    return current_health
 
+def dialogs():
+    i = 1
+    while i != len(boards[player['board']]['characters']):
+        if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
+            print(characters[boards[player['board']]['characters'][i]]['dialogs'][1])
+            is_running = True
+            x = 0
+            while is_running:
+                a = characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]][1+x]
+                b = boards[player['board']]['characters'][i]
+                key = input(f'Odpowiedz: \n(a): {a} \n(q): wyjść \n')
+                if key == 'q':
+                    is_running = False
+                elif key == 'a':
+                    x = x + 1
+                    if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]])) - 1:
+                        print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogs'][1+x])
+                    else:
+                        break    
+        i = i + 1
 
-
-print(player['health'])
-loose_health(40, player)
-print(player['health'])
+# dialogs()
+# display_player_stats()

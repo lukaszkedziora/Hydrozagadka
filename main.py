@@ -13,8 +13,7 @@ BOARD_HEIGHT = 20
 
 def create_player():
     '''
-    Creates a 'player' dictionary for storing all player related informations - i.e. player icon, player position.
-    Fell free to extend this dictionary!
+    Createrree to extend this dictionary!
 
     Returns:
     dictionary
@@ -39,6 +38,7 @@ def main():
         key = util.key_pressed()    
         if key == 'w' or 'd' or 's' or 'a':
             engine.wsad(key, board)
+            engine.dialogs()
         if key == 'q':
             is_running = False
         else:
