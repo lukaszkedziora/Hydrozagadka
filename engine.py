@@ -1,3 +1,6 @@
+import util
+import main
+
 player = {
     'board': 'board1',
     'name': 'Kapitan AS'
@@ -135,25 +138,27 @@ def is_move_possible(board, move):
 
 
 def dialogue():
-
     i = 1
     while i != len(boards[player['board']]['characters']):
         if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
             print(characters[boards[player['board']]['characters'][i]]['dialogue'][1])
-            is_running = True
+            ist_running = True
             x = 0
-            while is_running:
+            while ist_running:
+                #main.printing_board()
                 a = characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]][1+x]
                 b = boards[player['board']]['characters'][i]
-                key = input(f'Odpowiedz: \n(a): {a} \n(q): wyjść \n')
-                if key == 'q':
-                    is_running = False
+                print(f'Odpowiedz: \n(a): {a} \n(q): wyjść \n')
+                key = util.key_pressed()    
+                if key == 'c':
+                    ist_running = False
                 elif key == 'a':
                     x = x + 1
                     if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
                         print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
+                        #main.printing_board()
                     else:
-                        break    
+                        break
         i = i + 1
 
 #dialogue()

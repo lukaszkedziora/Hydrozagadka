@@ -30,16 +30,22 @@ def main():
         board = engine.create_board()
         x = engine.put_player_on_board(board)
         ui.display_board(x)
-        
         key = util.key_pressed()    
         if key == 'w' or 'd' or 's' or 'a':
             engine.wsad(key, board)
             engine.dialogue()
+
         if key == 'q':
-            is_running = False
+            is_runnings = False
         else:
             pass
         util.clear_screen()
+
+def printing_board():
+    board = engine.create_board()
+    x = engine.put_player_on_board(board)
+    ui.display_board(x)
+    key = util.key_pressed() 
 
 
 if __name__ == '__main__':
