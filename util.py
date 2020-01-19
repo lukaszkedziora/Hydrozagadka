@@ -18,7 +18,7 @@ def key_pressed():
     else:
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
-        try:
+        try: 
             tty.setraw(fd)
             ch = sys.stdin.read(1)
         finally:
