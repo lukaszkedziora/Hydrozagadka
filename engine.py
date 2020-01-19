@@ -10,7 +10,7 @@ characters = {
         'position': {
             'board1': [14, 15]
         },
-        'dialogs': {
+        'dialogue': {
             1: 'Cześć Janku..',
             2: 'Piękna pogoda, prawda?',
             3: 'Może dlatego w całym mieście brakuje wody',
@@ -24,7 +24,7 @@ characters = {
         'position': {
             'board1': [14, 15]
         },
-        'dialogs': {
+        'dialogue': {
             'jola': {
                 1: 'Cześć Jolu!',
                 2: 'Straszna spiekota',
@@ -47,7 +47,7 @@ characters = {
         'position': {
             'board1': [16, 11]
         },
-        'dialogs':{
+        'dialogue':{
             1: 'Witaj Janku',
         }
     },
@@ -134,25 +134,26 @@ def is_move_possible(board, move):
 #        pass                                            # add item to inventory
 
 
-def dialogs():
+def dialogue():
+
     i = 1
     while i != len(boards[player['board']]['characters']):
         if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
-            print(characters[boards[player['board']]['characters'][i]]['dialogs'][1])
+            print(characters[boards[player['board']]['characters'][i]]['dialogue'][1])
             is_running = True
             x = 0
             while is_running:
-                a = characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]][1+x]
+                a = characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]][1+x]
                 b = boards[player['board']]['characters'][i]
                 key = input(f'Odpowiedz: \n(a): {a} \n(q): wyjść \n')
                 if key == 'q':
                     is_running = False
                 elif key == 'a':
                     x = x + 1
-                    if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]])) - 1:
-                        print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogs'][1+x])
+                    if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
+                        print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
                     else:
                         break    
         i = i + 1
 
-#dialogs()
+#dialogue()
