@@ -3,8 +3,13 @@ import engine
 
 player = {
     'board': 'board1',
-    'name': 'Kapitan AS'
+    'name': 'Kapitan AS',
+    'player name': '',
+    'position': [], # characters[boards[player['board']]['characters'][1]]['position'][player['board']],
+    'health': 100,
+    'inventory': ["umbrella", "key"]
 }
+
 
 characters = {
     'jola': {
@@ -87,8 +92,8 @@ def put_player_on_board(result1):
 
 
 def wsad(key, board):      
-    player_position = characters[boards[player['board']]['characters'][1]]['position'][player['board']]
-    next_move = player_position.copy()
+    player_position = characters[boards[player['board']]['characters'][1]]['position'][player['board']]     # starting position in dictionary
+    next_move = player_position.copy()                      # copy of player position that will be modified
     if key == "w":
         next_move[0] -= 1
     elif key == "a":
@@ -97,23 +102,50 @@ def wsad(key, board):
         next_move[0] += 1
     elif key == "d":
         next_move[1] += 1
-    if is_move_possible(board, next_move):
-        player_position[0] = next_move[0]
+    if is_move_possible(board, next_move):                  # checks if move is possible: within board range
+        player_position[0] = next_move[0]                   # and not blocked by a wall
         player_position[1] = next_move[1]
 
 
 def is_move_possible(board, move):
     walls = ["|", "~"] 
-    if move[0] < 1 or move[0] >= len(board)-1:          
+    if move[0] < 1 or move[0] >= len(board)-1:              # is move in range width
         return False
-    if move[1] < 1 or move[1] >= len(board[0])-1:      
+    if move[1] < 1 or move[1] >= len(board[0])-1:           # is move in range height
         return False
-    if board[move[0]][move[1]] in walls:
+    if board[move[0]][move[1]] in walls:                    # is move blocked by a wall
         return False
     return True
 
 def is_item(board, move):
-    items = ["*"] 
+    items = ["*"]                                           # boards[player['board']]['items']
     if board[move[0]][move[1]] in items:
-        pass                                            # add item to inventory
+        pass                                                # add item to inventory
 
+def print_message(message):
+    print(message)
+
+message = "Dzien dobry"
+
+def display_player_stats():
+    print()
+    print("+--------+", '{:>95}'.format('Messages:'))
+    print("|    ___ |  Player name: ", player['player name'], '{:>50}'.format(message))
+    print("|   /   ||  Level: ", player['board'])
+    print("|  / /| ||  Health: ", player['health'])
+    print("| / ___ ||")
+    print("|/_/  |_||  Inventory: ", player['inventory'])
+    print("+--------+")
+    print()
+
+def loose_health(amount, player):
+    for player_health in player:
+        player_health = player['health']
+        current_health = player_health - amount
+    return current_health
+
+
+
+print(player['health'])
+loose_health(40, player)
+print(player['health'])

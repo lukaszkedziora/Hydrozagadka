@@ -16,21 +16,25 @@ def create_player():
     Creates a 'player' dictionary for storing all player related informations - i.e. player icon, player position.
     Fell free to extend this dictionary!
 
-    Returns:s
+    Returns:
     dictionary
     '''
-    pass
+  
+    engine.player['player name'] = input("Please enter player's name: ")
 
 
 def main():
+    util.clear_screen()
     player = create_player()
     util.clear_screen()
+    
     is_running = True
 
     while is_running:
         board = engine.create_board()
         x = engine.put_player_on_board(board)
         ui.display_board(x)
+        engine.display_player_stats()
         
         key = util.key_pressed()    
         if key == 'w' or 'd' or 's' or 'a':
