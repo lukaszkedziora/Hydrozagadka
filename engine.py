@@ -8,14 +8,14 @@ characters = {
         'title': 'Pani Jola',
         'pictogram': '⚥',
         'position': {
-            'board1': [16, 15]
+            'board1': [14, 15]
         },
         'dialogs': {
             1: 'Cześć Janku..',
-            2: 'Piękna pogoda prawda?',
-            3: 'Może dlatego w całym mieście prakuje wody',
-            4: 'Dlaczego miałbyś wiedzieć to zadanie dla As, a nie takiego Pana Janka..',
-            5: 'Spytaj Janusza',
+            2: 'Piękna pogoda, prawda?',
+            3: 'Może dlatego w całym mieście brakuje wody',
+            4: 'Dlaczego miałbyś wiedzieć, to zadanie dla Asaaa, a nie takiego Pana Janka.. Uwielbiam Aaasa, ahhhh',
+            5: 'Spytaj meterologa Janusza',
         },
     },
     'as': {
@@ -46,6 +46,9 @@ characters = {
         'pictogram': '☉',
         'position': {
             'board1': [16, 11]
+        },
+        'dialogs':{
+            1: 'Witaj Janku',
         }
     },
     'informator': {
@@ -133,23 +136,23 @@ def is_move_possible(board, move):
 
 def dialogs():
     i = 1
-    #while i != len(boards[player['board']]['characters']):
-    if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
-        print(characters[boards[player['board']]['characters'][i]]['dialogs'][1])
-        is_running = True
-        x = 0
-        while is_running:
-            a = characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]][1+x]
-            key = input(f'Co chcesz zrobić? \n(a): {a} \n(q): wyjść \n')
-            if key == 'q':
-                is_running = False
-            elif key == 'a':
-                x = x + 1
-                if x <= 4:
-                    print(characters[boards[player['board']]['characters'][i]]['dialogs'][1+x])
-                else:
-                    break    
+    while i != len(boards[player['board']]['characters']):
+        if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
+            print(characters[boards[player['board']]['characters'][i]]['dialogs'][1])
+            is_running = True
+            x = 0
+            while is_running:
+                a = characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]][1+x]
+                b = boards[player['board']]['characters'][i]
+                key = input(f'Odpowiedz: \n(a): {a} \n(q): wyjść \n')
+                if key == 'q':
+                    is_running = False
+                elif key == 'a':
+                    x = x + 1
+                    if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogs'][boards[player['board']]['characters'][i]])) - 1:
+                        print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogs'][1+x])
+                    else:
+                        break    
         i = i + 1
-       
 
 #dialogs()
