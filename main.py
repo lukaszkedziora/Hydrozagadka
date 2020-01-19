@@ -38,7 +38,7 @@ def main():
         key = util.key_pressed()    
         if key == 'w' or 'd' or 's' or 'a':
             engine.wsad(key, board)
-            engine.dialogs()
+            engine.dialogue()
         if key == 'q':
             is_running = False
         else:
