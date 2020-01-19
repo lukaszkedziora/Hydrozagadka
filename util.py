@@ -22,12 +22,12 @@ def key_pressed():
             tty.setraw(fd)
             ch = sys.stdin.read(1)
         finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)      
         return ch
 
 
 def clear_screen():
-    if os.name == "nt":
+    if os.name == "nt":             # dla windowsa
         os.system('cls')
     else:
-        os.system('clear')
+        os.system('clear')          # dla linuxa
