@@ -1,6 +1,7 @@
 import util
 import engine
 import ui
+from termcolor import colored, cprint
 # import time           MOZE SIE PRZYDAC DO DIALOGOW
 
 PLAYER_ICON = '@'
@@ -41,6 +42,8 @@ def main():
             engine.dialogue()
         if key == 'q':
             is_running = False
+        if key == 'h':
+            engine.loose_health(40)
         else:
             pass
         util.clear_screen()

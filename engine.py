@@ -1,3 +1,6 @@
+from termcolor import colored, cprint
+
+
 player = {
     'board': 'board1',
     'name': 'Kapitan AS',
@@ -10,9 +13,9 @@ player = {
 characters = {
     'jola': {
         'title': 'Pani Jola',
-        'pictogram': '⚥',
+        'pictogram': colored('⚥', 'magenta'),
         'position': {
-            'board1': [14, 15]
+            'board1': [13, 15]
         },
         'dialogue': {
             1: 'Cześć Janku..',
@@ -24,7 +27,7 @@ characters = {
     },
     'as': {
         'title': 'As',
-        'pictogram': '@',
+        'pictogram': colored('@', 'blue'),
         'position': {
             'board1': [14, 15]
         },
@@ -40,14 +43,14 @@ characters = {
     },
     'agenci': {
         'title': 'Agent',
-        'pictogram': '☭',
+        'pictogram': colored('☭', 'yellow'),
         'position': {
             'board1': [9, 90]
         }
     },
     'kolega': {
         'title': 'Kolega Janusz',
-        'pictogram': '☉',
+        'pictogram': colored('☉', 'cyan'),
         'position': {
             'board1': [16, 11]
         },
@@ -57,7 +60,7 @@ characters = {
     },
     'informator': {
         'title': 'Informator ',
-        'pictogram': '⚝',
+        'pictogram': colored('⚝', 'green'),
         'position': {
             'board1': [3, 92]
         }
@@ -141,13 +144,13 @@ def is_item(board, move):
 def display_player_stats():
     
     print()
-    print("+--------+", '{:>95}'.format('Messages:'))
-    print("|    ___ |  Player name: ", player['player name'], '{:>50}'.format("test message"))      # to do: add messages if needed
-    print("|   /   ||  Level: ", player['board'])
-    print("|  / /| ||  Health: ", player['health'])
-    print("| / ___ ||")
-    print("|/_/  |_||  Inventory: ", player['inventory'])
-    print("+--------+")
+    print(colored("+--------+", "blue"), '{:>95}'.format('Messages:'))
+    print(colored("|    ___ |", "blue"), "Player name: ", (colored(player['player name'], "magenta")), '{:>50}'.format("test message"))      # to do: add messages if needed
+    print(colored("|   /   ||", "blue"), "Level: ", player['board'])
+    print(colored("|  / /| ||", "blue"), "Health: ", player['health'])
+    print(colored("| / ___ ||", "blue"))
+    print(colored("|/_/  |_||", "blue"), "Inventory: ", player['inventory'])
+    print(colored("+--------+", "blue"))
     print()
 
 
@@ -155,7 +158,8 @@ def dialogue():
 
     i = 1
     while i != len(boards[player['board']]['characters']):
-        if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
+        if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
+            == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
             print(characters[boards[player['board']]['characters'][i]]['dialogue'][1])
             is_running = True
             x = 0
