@@ -1,5 +1,6 @@
 import util
-import main
+import ui
+
 
 player = {
     'board': 'board1',
@@ -86,6 +87,13 @@ boards = {
 }
 
 
+def printing_board():
+    util.clear_screen()
+    board = create_board()
+    x = put_player_on_board(board)
+    ui.display_board(x)
+
+
 def create_board(file_name=boards[player['board']]['file']):
     with open(file_name, 'r') as file:
         result2 = []
@@ -142,7 +150,6 @@ def is_item(board, move):
 
 
 def display_player_stats():
-    
     print("+---------+", '{:>95}'.format('Messages:'))
     print("|    ____ |  Player name: ", player['player name'], '{:>50}'.format("test message"))      # to do: add messages if needed
     print("|   / _  ||  Level: ", player['board'])
@@ -156,7 +163,7 @@ def dialogue():
     i = 1
     while i != len(boards[player['board']]['characters']):
         if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
-            main.printing_board()
+            printing_board()
             ist_running = True
             x = 0
             try:
@@ -171,11 +178,11 @@ def dialogue():
                     elif key_input == 'a':
                         x = x + 1
                         if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
-                            main.printing_board()  
+                            printing_board()  
                         else:
                             break
                     else:
-                        main.printing_board()
+                        printing_board()
             except KeyError:
                 print() #I've got nothing to say
         i = i + 1
