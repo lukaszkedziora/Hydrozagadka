@@ -98,14 +98,14 @@ def create_board(file_name=boards[player['board']]['file']):
 
 
 def put_player_on_board(result1):
-    for key in boards[player['board']]['items']:
-        items_pictogram = boards[player['board']]['items'][key][2]
-        result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
-            = items_pictogram
     for i in range(len(boards[player['board']]['characters'])):
         result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
             [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
             = characters[boards[player['board']]['characters'][i]]['pictogram']
+    for key in boards[player['board']]['items']:
+        items_pictogram = boards[player['board']]['items'][key][2]
+        result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
+            = items_pictogram
     return result1
 
 
@@ -159,20 +159,23 @@ def dialogue():
             main.printing_board()
             ist_running = True
             x = 0
-            while ist_running:
-                a = characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]][1+x]
-                b = characters[boards[player['board']]['characters'][i]]['title']
-                print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
-                print(f'Odpowiedz: \n{a} (a) \nDo widzenia (d)')
-                key_input = util.key_pressed()    
-                if key_input == 'd':
-                    ist_running = False
-                elif key_input == 'a':
-                    x = x + 1
-                    if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
-                        main.printing_board()  
+            try:
+                while ist_running:
+                    a = characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]][1+x]
+                    b = characters[boards[player['board']]['characters'][i]]['title']
+                    print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
+                    print(f'Odpowiedz: \n{a} (a) \nDo widzenia (d)')
+                    key_input = util.key_pressed()    
+                    if key_input == 'd':
+                        ist_running = False
+                    elif key_input == 'a':
+                        x = x + 1
+                        if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
+                            main.printing_board()  
+                        else:
+                            break
                     else:
-                        break
-                else:
-                    main.printing_board()
+                        main.printing_board()
+            except KeyError:
+                print() #I've got nothing to say
         i = i + 1
