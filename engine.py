@@ -1,5 +1,6 @@
 from termcolor import colored, cprint
-
+import util
+import ui
 
 player = {
     'board': 'board1',
@@ -29,7 +30,7 @@ characters = {
         'title': 'As',
         'pictogram': colored('@', 'blue'),
         'position': {
-            'board1': [14, 15]
+            'board1': [16, 15]
         },
         'dialogue': {
             'jola': {
@@ -86,6 +87,13 @@ boards = {
 }
 
 
+def printing_board():
+    util.clear_screen()
+    board = create_board()
+    x = put_player_on_board(board)
+    ui.display_board(x)
+
+
 def create_board(file_name=boards[player['board']]['file']):
     with open(file_name, 'r') as file:
         result2 = []
@@ -98,14 +106,14 @@ def create_board(file_name=boards[player['board']]['file']):
 
 
 def put_player_on_board(result1):
-    for key in boards[player['board']]['items']:
-        items_pictogram = boards[player['board']]['items'][key][2]
-        result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
-            = items_pictogram
     for i in range(len(boards[player['board']]['characters'])):
         result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
             [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
             = characters[boards[player['board']]['characters'][i]]['pictogram']
+    for key in boards[player['board']]['items']:
+        items_pictogram = boards[player['board']]['items'][key][2]
+        result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
+            = items_pictogram
     return result1
 
 
@@ -155,26 +163,33 @@ def display_player_stats():
 
 
 def dialogue():
-
     i = 1
     while i != len(boards[player['board']]['characters']):
-        if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
-            == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
-            print(characters[boards[player['board']]['characters'][i]]['dialogue'][1])
-            is_running = True
+        if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
+            printing_board()
+            ist_running = True
             x = 0
-            while is_running:
-                a = characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]][1+x]
-                b = boards[player['board']]['characters'][i]
-                key = input(f'Odpowiedz: \n(a): {a} \n(q): wyjść \n')
-                if key == 'q':
-                    is_running = False
-                elif key == 'a':
-                    x = x + 1
-                    if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
-                        print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
+            try:
+                while ist_running:
+                    a = characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]][1+x]
+                    b = characters[boards[player['board']]['characters'][i]]['title']
+                    print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
+                    print(f'Odpowiedz: \n{a} (a) \nDo widzenia (d)')
+                    key_input = util.key_pressed()    
+                    if key_input == 'd':
+                        ist_running = False
+                    elif key_input == 'a':
+                        x = x + 1
+                        if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
+                            printing_board()  
+                        else:
+                            break
                     else:
-                        break    
+                        printing_board()
+            except KeyError:
+                print() #I've got nothing to say
         i = i + 1
 
 
+def modify_player_health(amount):
+    player['health'] += amount

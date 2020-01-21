@@ -4,13 +4,6 @@ import ui
 from termcolor import colored, cprint
 # import time           MOZE SIE PRZYDAC DO DIALOGOW
 
-PLAYER_ICON = '@'
-PLAYER_START_X = 3
-PLAYER_START_Y = 3 
-
-BOARD_WIDTH = 30
-BOARD_HEIGHT = 20
-
 
 def create_player():
     '''
@@ -31,23 +24,24 @@ def main():
     is_running = True
 
     while is_running:
-        board = engine.create_board()
-        x = engine.put_player_on_board(board)
-        ui.display_board(x)
+        engine.printing_board()
         engine.display_player_stats()
         
         key = util.key_pressed()    
-        if key == 'w' or 'd' or 's' or 'a':
-            engine.wsad(key, board)
-            engine.dialogue()
-        if key == 'q':
+        if engine.player['health'] > 0:
+            if key == 'q':
+                is_running = False
+            elif key == 'w' or 'd' or 's' or 'a':
+                board = engine.create_board()
+                engine.wsad(key, board)
+                engine.dialogue()
+            else:
+                pass
+            util.clear_screen()
+        elif engine.player['health'] <= 0:
+            print(colored('******* GAME OVER *******\n', "red"))
             is_running = False
-        if key == 'h':
-            engine.loose_health(40)
-        else:
-            pass
-        util.clear_screen()
-
+            
 
 if __name__ == '__main__':
     main()
