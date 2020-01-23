@@ -112,7 +112,7 @@ characters = {
         'pictogram': colored('Ѿ', 'red'),
         'status': False,
         'position': {
-            'board3': [9, 90]
+            'board3': [9, 86]
         } 
     },
     'Plama': {
@@ -120,7 +120,7 @@ characters = {
         'pictogram': colored('ආ', 'yellow'),
         'status': False,
         'position': {
-            'board3': [9, 92]
+            'board3': [9, 84]
         }
     },   
     'krokodyl': {
