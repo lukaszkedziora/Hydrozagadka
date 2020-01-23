@@ -6,25 +6,19 @@ from termcolor import colored, cprint
 
 
 def create_player():
-    '''
-    Createrree to extend this dictionary!
-
-    Returns:
-    dictionary
-    '''
   
     engine.player['player name'] = input("Please enter player's name: ")
+    engine.player['position'] = engine.characters[engine.boards[engine.player['board']]['characters'][0]]['position'][engine.player['board']]
 
 
 def main():
     util.clear_screen()
-    player = create_player()
+    player = create_player()   
     util.clear_screen()
-    
     is_running = True
 
     while is_running:
-        engine.printing_board()
+        ui.display_board(engine.put_player_on_board(engine.create_board(engine.player['board'])))
         engine.display_player_stats()
         
         key = util.key_pressed()    
@@ -32,14 +26,15 @@ def main():
             if key == 'q':
                 is_running = False
             elif key == 'w' or 'd' or 's' or 'a':
-                board = engine.create_board()
+                board = engine.create_board(engine.player['board'])
                 engine.wsad(key, board)
                 engine.dialogue()
             else:
                 pass
-            util.clear_screen()
+            util.clear_screen()  
         elif engine.player['health'] <= 0:
-            print(colored('******* GAME OVER *******\n', "red"))
+            util.clear_screen()
+            engine.game_over()
             is_running = False
             
 
