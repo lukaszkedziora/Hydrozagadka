@@ -14,7 +14,10 @@ def main():
     util.clear_screen()
     is_running = True
     while is_running:
+        util.clear_screen()
         ui.display_board(engine.put_player_on_board(engine.create_board(engine.player['board'])))
+        engine.bot_movement()
+        engine.bot_interaction()
         engine.display_player_stats()
         key = util.key_pressed()
         if key == 'q':
@@ -24,8 +27,7 @@ def main():
             engine.wsad(key, board)
             engine.dialogue()    
         else:
-            pass
-        util.clear_screen()
+            util.clear_screen()
 
 
  

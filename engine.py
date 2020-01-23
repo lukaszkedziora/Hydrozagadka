@@ -1,5 +1,6 @@
 import util
 import ui
+import random
 
 
 player = {
@@ -7,9 +8,9 @@ player = {
     'name': 'Kapitan AS',
     'player name': '',
     'health': 100,
+    'status': 'Na wschodzie bez zmian!',
     'inventory': "test"                          # to do: add inventory
 }
-
 
 characters = {
     'jola': {
@@ -102,15 +103,208 @@ characters = {
         'dialogue': {
             1: 'Witaj Janku',
         }
-    }
+    },
+    'droznik': {
+        'title': 'Dróżnik',
+        'status': True,
+        'pictogram': '☢',
+        'position': {
+            'board1': [3, 93],
+            'board2': [16, 29]
+        },
+        'dialogue': {
+            1: 'Witaj Janku',
+        }
+    },
+    'szefowa': {
+        'title': 'Iga ze Złego Leszcza',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        },
+        'dialogue': {
+            1: 'Witaj Janku',
+        }
+    },
+    'maharadza': {
+        'title': 'Maharadża Kaburu',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        },
+        'dialogue': {
+            1: 'Witaj Janku',
+        }
+    },
+    'szefowa': {
+        'title': 'Iga ze Złego Leszcza',
+        'status': False,
+        'pictogram': '🍾',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'plama': {
+        'title': 'doktur Plama',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        },
+        'dialogue': {
+            1: 'Witaj Janku',
+        }
+    },
+    'bot1': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot2': {
+        'title': 'bot2',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot3': {
+        'title': 'bot3',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot4': {
+        'title': 'bot4',
+        'status': False,
+        'pictogram': '🐟',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot5': {
+        'title': 'bot5',
+        'status': False,
+        'pictogram': '🐦',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot6': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '🐦',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot7': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '🐦',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot8': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '🐦',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot9': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '🐦',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot10': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '🐦',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },'bot11': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '⛅',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot12': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '⛅',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot13': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '⛅',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot14': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '⛅',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
+    'bot15': {
+        'title': 'bot1',
+        'status': False,
+        'pictogram': '⛅',
+        'position': {
+            'board1': [3, 93],
+            'board2': [8, 82]
+        }
+    },
 }
+
+
 
 boards = {
     'board1': {
-        'title': 'board1',
-        'items': {'Parsolka': [5, 43, '☢'],
+        'title': '1',
+        'items': {'Parsolka': [5, 43, '☂'],
                   'Karma': [4, 43, '☠'],
-                  'Kombinezon': [3, 43, '☂']
+                  'Kombinezon': [3, 43, '☣']
                 },
         'file': 'board1.txt',
         'river': {
@@ -119,11 +313,16 @@ boards = {
             'in': '*',
             'out': '/'
         },
-        'characters': ['as', 'jola', 'kolega', 'agenci', 'informator']
+        'characters': ['as', 'jola', 'kolega', 'agenci', 'informator'],
+        'bots': {
+            'bots_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5'],
+            'bots_sun': ['bot11', 'bot12', 'bot13', 'bot14', 'bot15'],
+            'bots_bird': ['bot6', 'bot7', 'bot8', 'bot9', 'bot10']
+        }
     },
     'board2': {
-        'title': 'board2',
-        'items': {'Parsolka': [5, 43, '☢'],
+        'title': '2',
+        'items': {'Alkohol': [5, 43, '☢'],
                   'Karma': [4, 43, '☠'],
                   'Kombinezon': [3, 43, '☂']
                 },
@@ -134,7 +333,10 @@ boards = {
             'in': '*',
             'out': '/'
         },
-        'characters': ['as', 'jola', 'informator']
+        'characters': ['as', 'droznik', 'szefowa'],
+        'bots': {
+            'bots_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5']
+        }  
     }
 }
 
@@ -157,12 +359,51 @@ def put_player_on_board(result1):
         result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
             [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
             = characters[boards[player['board']]['characters'][i]]['pictogram']
+    for bots_type in boards[player['board']]['bots']:
+        for x in range(len(boards[player['board']]['bots'][bots_type])):          
+            result1[characters[boards[player['board']]['bots'][bots_type][x]]['position'][player['board']][0]] \
+                [characters[boards[player['board']]['bots'][bots_type][x]]['position'][player['board']][1]] \
+                    = characters[boards[player['board']]['bots'][bots_type][x]]['pictogram']
     for key in boards[player['board']]['items']:
         items_pictogram = boards[player['board']]['items'][key][2]
         result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
             = items_pictogram
     return result1
 
+def bot_movement():
+    for bot_type in boards[player['board']]['bots']:
+        for bot_name in boards[player['board']]['bots'][bot_type]:
+            if bot_type == 'bots_fish':
+                characters[bot_name]['position'][player['board']][0] = random.randint(15, 18)
+                characters[bot_name]['position'][player['board']][1] = random.randint(59, 98)
+            elif bot_type == 'bots_sun':
+                characters[bot_name]['position'][player['board']][0] = random.randint(9, 18)
+                characters[bot_name]['position'][player['board']][1] = random.randint(8, 21)
+            elif bot_type == 'bots_bird':
+                characters[bot_name]['position'][player['board']][0] = random.randint(1, 4)
+                characters[bot_name]['position'][player['board']][1] = random.randint(87, 99)
+    
+
+def bot_interaction():
+    for bots_type in boards[player['board']]['bots']:
+        for i in range(len(boards[player['board']]['bots'][bots_type])):
+            if bots_type == 'bots_fish':
+                if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
+                     == characters[boards[player['board']]['bots']['bots_fish'][i]]['position'][player['board']]:
+                    player['health'] = player['health'] - 100
+                    player['status'] = 'Health - 100, zjadły Cię zmutowane leszcze!'
+            elif bots_type == 'bots_sun':
+                if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
+                     == characters[boards[player['board']]['bots']['bots_sun'][i]]['position'][player['board']]:
+                    player['health'] = player['health'] - 10
+                    player['status'] = 'Health - 10, ostre słońe spiekło Ci skórę!'      
+            elif bots_type == 'bot_bird':
+                if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
+                 == characters[boards[player['board']]['bots']['bots_bird'][i]]['position'][player['board']]:
+                    player['health'] = player['health'] - 20
+                    player['status'] = 'Health - 20, podziobały Cię spragnione wróble!'      
+                        
+               
 
 def wsad(key, board):      
     player_position = characters[boards[player['board']]['characters'][0]]['position'][player['board']]     # starting position in dictionary
@@ -190,6 +431,7 @@ def is_move_possible(board, move):
         return False
     return True
 
+
 def is_item(board, move):
     items = []                                              # boards[player['board']]['items']
     if board[move[0]][move[1]] in items:
@@ -197,28 +439,18 @@ def is_item(board, move):
 
 
 def display_player_stats():
-    print("+---------+", '{:>80}'.format('Messages:'))
-    print("|    ____ |  Player name: ", player['player name'], '{:>50}'.format("test message"))      # to do: add messages if needed
-    print("|   / _  ||  Level: ", player['board'])
+    print("+---------+", '{:>80}'.format('x'))
+    print("|    ____ |  Player name: ", player['player name'],' | Status:', player['status'])      # to do: add messages if needed
+    print("|   / _  ||  Level: ", boards[player['board']]['title'])
     print("|  / /_| ||  Health: ", player['health'])
     print("| / ___  ||")
     print("|/_/   |_||  Inventory: ", player['inventory'])
     print("+---------+")
 
 
-#def board_changer(i, ist_running):
-#    if i < len(boards[player['board']]['characters']) - 1:
-#         characters[boards[player['board']]['characters'][i+1]]['status'] = True
-#    else:
-#        player['board'] = 'board2'
-#        i = len(boards[player['board']]['characters'])-1
-#        ist_running = False
-
-
 def dialogue():
     i = 1
     while i != len(boards[player['board']]['characters']):
-        print()
         if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
             if characters[boards[player['board']]['characters'][i]]['status'] == True:
                 ist_running = True
