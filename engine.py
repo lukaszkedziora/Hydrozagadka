@@ -1,6 +1,7 @@
 import util
 import ui
 import random
+import time
 
 
 player = {
@@ -33,8 +34,8 @@ characters = {
         'title': 'As',
         'pictogram': '@',
         'position': {
-            'board1': [16, 15],
-            'board2': [16, 15]
+            'board1': [2, 2],
+            'board2': [2, 2]
         },
         'dialogue': {
             'jola': {
@@ -45,11 +46,13 @@ characters = {
                 5: 'Dziękuję!'
             },
             'kolega': {
-                1: 'Cześć Jolu!',
-                2: 'Straszna spiekota',
-                3: 'Jak to brakuje wody, nic o tym nie wiem!',
-                4: 'Gdzie mogę dowiedzieć się więcej?',
-                5: 'Dziękuję!'
+                1: 'Cześć Januszu!',
+                2: 'Zastanawiam się co dzisiaj powie nam Wicherek?',
+                3: 'Słyszałem, że kończą się zapasy wody, czy to prawda?',
+                4: 'Januszu spróbuj sobie coś przypomnieć, to dla mnie ważne',
+                5: 'Co słyszałeś Januszu, szybciej, mów!',
+                6: 'Będę milczał jak zaklęty, przysięga meteorologa',
+                7: 'Żegnaj Januszu'
             },
             'agenci': {
                 1: 'Cześć Jolu!',
@@ -90,6 +93,12 @@ characters = {
         },
         'dialogue': {
             1: 'Witaj Janku',
+            2: 'Co tam u Ciebie?',
+            3: 'Że upał i spiekota utrzymają się do końca tygodnia',
+            4: 'Te sprawy są dzisiaj ściśle tajne, nic nie wiem..',
+            5: 'Słyszełm, że ..',
+            6: 'Jeśli komukolwiek wygadasz, to () przysięgam!',
+            7: 'Słyszałem, że Wydział II Urzędu Ochrny Wody się tym zajmuje, idź nad rzekę'
         }
     },
     'informator': {
@@ -200,7 +209,7 @@ characters = {
     'bot5': {
         'title': 'bot5',
         'status': False,
-        'pictogram': '🐦',
+        'pictogram': '🐟',
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -297,8 +306,6 @@ characters = {
     },
 }
 
-
-
 boards = {
     'board1': {
         'title': '1',
@@ -314,10 +321,10 @@ boards = {
             'out': '/'
         },
         'characters': ['as', 'jola', 'kolega', 'agenci', 'informator'],
-        'bots': {
-            'bots_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5'],
-            'bots_sun': ['bot11', 'bot12', 'bot13', 'bot14', 'bot15'],
-            'bots_bird': ['bot6', 'bot7', 'bot8', 'bot9', 'bot10']
+        'bot': {
+            'bot_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5'],
+            'bot_sun': ['bot11', 'bot12', 'bot13', 'bot14', 'bot15'],
+            'bot_bird': ['bot6', 'bot7', 'bot8', 'bot9', 'bot10']
         }
     },
     'board2': {
@@ -334,8 +341,8 @@ boards = {
             'out': '/'
         },
         'characters': ['as', 'droznik', 'szefowa'],
-        'bots': {
-            'bots_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5']
+        'bot': {
+            'bot_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5']
         }  
     }
 }
@@ -359,11 +366,11 @@ def put_player_on_board(result1):
         result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
             [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
             = characters[boards[player['board']]['characters'][i]]['pictogram']
-    for bots_type in boards[player['board']]['bots']:
-        for x in range(len(boards[player['board']]['bots'][bots_type])):          
-            result1[characters[boards[player['board']]['bots'][bots_type][x]]['position'][player['board']][0]] \
-                [characters[boards[player['board']]['bots'][bots_type][x]]['position'][player['board']][1]] \
-                    = characters[boards[player['board']]['bots'][bots_type][x]]['pictogram']
+    for bot_type in boards[player['board']]['bot']:
+        for x in range(len(boards[player['board']]['bot'][bot_type])):          
+            result1[characters[boards[player['board']]['bot'][bot_type][x]]['position'][player['board']][0]] \
+                [characters[boards[player['board']]['bot'][bot_type][x]]['position'][player['board']][1]] \
+                    = characters[boards[player['board']]['bot'][bot_type][x]]['pictogram']
     for key in boards[player['board']]['items']:
         items_pictogram = boards[player['board']]['items'][key][2]
         result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
@@ -371,37 +378,45 @@ def put_player_on_board(result1):
     return result1
 
 def bot_movement():
-    for bot_type in boards[player['board']]['bots']:
-        for bot_name in boards[player['board']]['bots'][bot_type]:
-            if bot_type == 'bots_fish':
+    for bot_type in boards[player['board']]['bot']:
+        for bot_name in boards[player['board']]['bot'][bot_type]:
+            if bot_type == 'bot_fish':
                 characters[bot_name]['position'][player['board']][0] = random.randint(15, 18)
                 characters[bot_name]['position'][player['board']][1] = random.randint(59, 98)
-            elif bot_type == 'bots_sun':
+            elif bot_type == 'bot_sun':
                 characters[bot_name]['position'][player['board']][0] = random.randint(9, 18)
                 characters[bot_name]['position'][player['board']][1] = random.randint(8, 21)
-            elif bot_type == 'bots_bird':
+            elif bot_type == 'bot_bird':
                 characters[bot_name]['position'][player['board']][0] = random.randint(1, 4)
                 characters[bot_name]['position'][player['board']][1] = random.randint(87, 99)
     
 
 def bot_interaction():
-    for bots_type in boards[player['board']]['bots']:
-        for i in range(len(boards[player['board']]['bots'][bots_type])):
-            if bots_type == 'bots_fish':
+    player['status'] = 'Na zachodzie bez zmian'
+    for bot_type in boards[player['board']]['bot']:
+        for i in range(len(boards[player['board']]['bot'][bot_type])):
+            if bot_type == 'bot_fish':
                 if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
-                     == characters[boards[player['board']]['bots']['bots_fish'][i]]['position'][player['board']]:
+                     == characters[boards[player['board']]['bot']['bot_fish'][i]]['position'][player['board']]:
                     player['health'] = player['health'] - 100
                     player['status'] = 'Health - 100, zjadły Cię zmutowane leszcze!'
-            elif bots_type == 'bots_sun':
+            elif bot_type == 'bot_sun':
                 if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
-                     == characters[boards[player['board']]['bots']['bots_sun'][i]]['position'][player['board']]:
+                     == characters[boards[player['board']]['bot']['bot_sun'][i]]['position'][player['board']]:
                     player['health'] = player['health'] - 10
-                    player['status'] = 'Health - 10, ostre słońe spiekło Ci skórę!'      
-            elif bots_type == 'bot_bird':
+                    player['status'] = 'Health - 10, ostre słońe spiekło Ci skórę!'
+                    #print('____________________________' '\n \n' 'Health - 1 ''\n''ostre słońe spiekło Ci skórę!')
+                    #print('____________________________')
+                    #time.sleep(.900)
+                    #util.clear_screen()      
+            elif bot_type == 'bot_bird':
                 if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
-                 == characters[boards[player['board']]['bots']['bots_bird'][i]]['position'][player['board']]:
+                 == characters[boards[player['board']]['bot']['bot_bird'][i]]['position'][player['board']]:
                     player['health'] = player['health'] - 20
-                    player['status'] = 'Health - 20, podziobały Cię spragnione wróble!'      
+                    player['status'] = 'Health - 20, podziobały Cię spragnione wróble!'
+         
+                
+      
                         
                
 
