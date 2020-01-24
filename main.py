@@ -18,7 +18,10 @@ def main():
     is_running = True
 
     while is_running:
+        util.clear_screen()
         ui.display_board(engine.put_player_on_board(engine.create_board(engine.player['board'])))
+        engine.bot_movement()
+        engine.bot_interaction()
         engine.display_player_stats()
         
         key = util.key_pressed()    
@@ -37,6 +40,18 @@ def main():
             util.clear_screen()
             engine.game_over()
             is_running = False
+        elif key == 'w' or 'd' or 's' or 'a':
+            board = engine.create_board(engine.player['board'])
+            engine.wsad(key, board)
+            engine.dialogue()  
+        #elif key == '~':
+        #    key_1 = input('Wpisz polecenie help lub kod specjalny') 
+        else:
+            util.clear_screen()
+
+
+ 
+
             
 
 if __name__ == '__main__':
