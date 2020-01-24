@@ -1,7 +1,7 @@
 import util
 import ui
 import random
-import time
+# import time
 
 
 player = {
@@ -10,7 +10,14 @@ player = {
     'player name': '',
     'health': 100,
     'status': 'Na wschodzie bez zmian!',
-    'inventory': "test"                          # to do: add inventory
+    'inventory': {
+        'kamizelka': 0,
+        'trutka': 0,
+        'parasol': 0,
+        'alkohol': 0,
+        'winstony': 0,
+        'epoca': 0
+    }
 }
 
 characters = {
@@ -55,11 +62,8 @@ characters = {
                 7: 'Żegnaj Januszu'
             },
             'agenci': {
-                1: 'Cześć Jolu!',
-                2: 'Straszna spiekota',
-                3: 'Jak to brakuje wody, nic o tym nie wiem!',
-                4: 'Gdzie mogę dowiedzieć się więcej?',
-                5: 'Dziękuję!'
+                1: 'Przyszedłem na ryby',
+                2: 'A może jest jeszcze inny powód?'
             },
             'informator': {
                 1: 'Cześć Jolu!',
@@ -80,13 +84,15 @@ characters = {
 
         },
         'dialogue': {
-            1: 'Witaj Janku',
+            1: 'Szukasz czegoś?',
+            2: 'Złowisz tylko leszcza, wszystkie inne ryby trzymją się dna przez upał'
+
         }
     },
     'kolega': {
         'title': 'Meterolog Janusz',
         'pictogram': '☉',
-        'status': False, 
+        'status': False,
         'position': {
             'board1': [16, 11],
             'board2': [16, 11]
@@ -98,7 +104,7 @@ characters = {
             4: 'Te sprawy są dzisiaj ściśle tajne, nic nie wiem..',
             5: 'Słyszełm, że ..',
             6: 'Jeśli komukolwiek wygadasz, to () przysięgam!',
-            7: 'Słyszałem, że Wydział II Urzędu Ochrny Wody się tym zajmuje, idź nad rzekę'
+            7: 'Słyszałem, że Wydział II Urzędu Bezpieczeństwa Wody się tym zajmuje, idź nad rzekę'
         }
     },
     'informator': {
@@ -116,7 +122,10 @@ characters = {
     'droznik': {
         'title': 'Dróżnik',
         'status': True,
-        'pictogram': '☢',
+        'pictogram': '🚆',
+        'items': {
+            'alkohol': 1
+        },
         'position': {
             'board1': [3, 93],
             'board2': [16, 29]
@@ -126,9 +135,13 @@ characters = {
         }
     },
     'szefowa': {
-        'title': 'Iga ze Złego Leszcza',
+        'title': 'Iga ze Złotego Leszcza',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': '🍾',
+        'items': {
+            'winstony': 1,
+            'epoca': 1
+        },
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -147,15 +160,6 @@ characters = {
         },
         'dialogue': {
             1: 'Witaj Janku',
-        }
-    },
-    'szefowa': {
-        'title': 'Iga ze Złego Leszcza',
-        'status': False,
-        'pictogram': '🍾',
-        'position': {
-            'board1': [3, 93],
-            'board2': [8, 82]
         }
     },
     'plama': {
@@ -259,7 +263,8 @@ characters = {
             'board1': [3, 93],
             'board2': [8, 82]
         }
-    },'bot11': {
+    },
+        'bot11': {
         'title': 'bot1',
         'status': False,
         'pictogram': '⛅',
@@ -312,7 +317,7 @@ boards = {
         'items': {'Parsolka': [5, 43, '☂'],
                   'Karma': [4, 43, '☠'],
                   'Kombinezon': [3, 43, '☣']
-                },
+            },
         'file': 'board1.txt',
         'river': {
             'start': 50,
@@ -329,10 +334,8 @@ boards = {
     },
     'board2': {
         'title': '2',
-        'items': {'Alkohol': [5, 43, '☢'],
-                  'Karma': [4, 43, '☠'],
-                  'Kombinezon': [3, 43, '☂']
-                },
+        'items': {
+            },
         'file': 'board2.txt',
         'river': {
             'start': 50,
@@ -343,7 +346,7 @@ boards = {
         'characters': ['as', 'droznik', 'szefowa'],
         'bot': {
             'bot_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5']
-        }  
+        }
     }
 }
 
@@ -363,19 +366,20 @@ def create_board(current_board=player['board']):
 
 def put_player_on_board(result1):
     for i in range(len(boards[player['board']]['characters'])):
-        result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]] \
+        result1[characters[boards[player['board']]['characters'][i]]['position'][player['board']][0]]\
             [characters[boards[player['board']]['characters'][i]]['position'][player['board']][1]] \
             = characters[boards[player['board']]['characters'][i]]['pictogram']
     for bot_type in boards[player['board']]['bot']:
-        for x in range(len(boards[player['board']]['bot'][bot_type])):          
-            result1[characters[boards[player['board']]['bot'][bot_type][x]]['position'][player['board']][0]] \
+        for x in range(len(boards[player['board']]['bot'][bot_type])):
+            result1[characters[boards[player['board']]['bot'][bot_type][x]]['position'][player['board']][0]]\
                 [characters[boards[player['board']]['bot'][bot_type][x]]['position'][player['board']][1]] \
-                    = characters[boards[player['board']]['bot'][bot_type][x]]['pictogram']
+                = characters[boards[player['board']]['bot'][bot_type][x]]['pictogram']
     for key in boards[player['board']]['items']:
         items_pictogram = boards[player['board']]['items'][key][2]
         result1[boards[player['board']]['items'][key][0]][boards[player['board']]['items'][key][1]] \
             = items_pictogram
     return result1
+
 
 def bot_movement():
     for bot_type in boards[player['board']]['bot']:
@@ -389,10 +393,10 @@ def bot_movement():
             elif bot_type == 'bot_bird':
                 characters[bot_name]['position'][player['board']][0] = random.randint(1, 4)
                 characters[bot_name]['position'][player['board']][1] = random.randint(87, 99)
-    
+
 
 def bot_interaction():
-    player['status'] = 'Na zachodzie bez zmian'
+    # player['status'] = 'Na wschodzie bez zmian'
     for bot_type in boards[player['board']]['bot']:
         for i in range(len(boards[player['board']]['bot'][bot_type])):
             if bot_type == 'bot_fish':
@@ -405,22 +409,18 @@ def bot_interaction():
                      == characters[boards[player['board']]['bot']['bot_sun'][i]]['position'][player['board']]:
                     player['health'] = player['health'] - 10
                     player['status'] = 'Health - 10, ostre słońe spiekło Ci skórę!'
-                    #print('____________________________' '\n \n' 'Health - 1 ''\n''ostre słońe spiekło Ci skórę!')
-                    #print('____________________________')
-                    #time.sleep(.900)
-                    #util.clear_screen()      
+                    # print('____________________________' '\n \n' 'Health - 1 ''\n''ostre słońe spiekło Ci skórę!')
+                    # print('____________________________')
+                    # time.sleep(.900)
+                    # util.clear_screen()
             elif bot_type == 'bot_bird':
                 if characters[boards[player['board']]['characters'][0]]['position'][player['board']] \
                  == characters[boards[player['board']]['bot']['bot_bird'][i]]['position'][player['board']]:
                     player['health'] = player['health'] - 20
                     player['status'] = 'Health - 20, podziobały Cię spragnione wróble!'
-         
-                
-      
-                        
-               
 
-def wsad(key, board):      
+
+def wsad(key, board):
     player_position = characters[boards[player['board']]['characters'][0]]['position'][player['board']]     # starting position in dictionary
     next_move = player_position.copy()                      # copy of player position that will be modified
     if key == "w":
@@ -437,7 +437,7 @@ def wsad(key, board):
 
 
 def is_move_possible(board, move):
-    walls = ["|", "~", "█", "^"] 
+    walls = ["|", "~", "█", "^"]
     if move[0] < 1 or move[0] >= len(board)-1:              # is move in range height
         return False
     if move[1] < 1 or move[1] >= len(board[0])-1:           # is move in range width
@@ -445,6 +445,26 @@ def is_move_possible(board, move):
     if board[move[0]][move[1]] in walls:                    # is move blocked by a wall
         return False
     return True
+
+def get_items():
+    inventory2 = {}     # na planszy 2 nie mamy itemów
+    items_2 = ['papierosy', "Ballentine’s"]     # bierzemy je od szefowej
+    print(inventory2)
+    print(items_2)
+    letter = ['t', 't']
+    choice = input('Press (g) to get items: ')
+    if choice in letter:
+        for i in items_2:
+            if i not in inventory2:
+                inventory2[i] = 1
+            else:
+                inventory2[i] += 1 
+        for key, value in inventory2.items():
+            print(f'{key}: {value}')    # mamy itemy
+            items_2.clear()     # znikają ze sklepu
+        print(items_2)
+    return
+
 
 
 def is_item(board, move):
@@ -454,20 +474,23 @@ def is_item(board, move):
 
 
 def display_player_stats():
-    print("+---------+", '{:>80}'.format('x'))
-    print("|    ____ |  Player name: ", player['player name'],' | Status:', player['status'])      # to do: add messages if needed
+    print("+---------+")
+    print("|    ____ |  Player name: ", player['player name'])      # to do: add messages if needed
     print("|   / _  ||  Level: ", boards[player['board']]['title'])
     print("|  / /_| ||  Health: ", player['health'])
-    print("| / ___  ||")
-    print("|/_/   |_||  Inventory: ", player['inventory'])
-    print("+---------+")
+    print("| / ___  ||  Info: ", player['status'])
+    print("|/_/   |_||  Inventory: ",'☠:', player['inventory'].get('trutka'), ' ☣:',\
+         player['inventory'].get('kamizelka'), ' ☂: ', player['inventory'].get('parasol'),\
+             ' 🚬:', player['inventory'].get('winstony'), ' 🍾:', player['inventory'].get('alkohol'),\
+                  ' 📰:', player['inventory'].get('epoca'))
+    print("+---------+  Help: shift + 1 | Credits: shift + 2 | q: exit")
 
 
 def dialogue():
     i = 1
     while i != len(boards[player['board']]['characters']):
         if characters[boards[player['board']]['characters'][0]]['position'][player['board']] == characters[boards[player['board']]['characters'][i]]['position'][player['board']]:
-            if characters[boards[player['board']]['characters'][i]]['status'] == True:
+            if characters[boards[player['board']]['characters'][i]]['status'] is True:
                 ist_running = True
                 x = 0
                 try:
@@ -478,9 +501,10 @@ def dialogue():
                         b = characters[boards[player['board']]['characters'][i]]['title']
                         print(b + ': ' + characters[boards[player['board']]['characters'][i]]['dialogue'][1+x])
                         print(f'Odpowiedz: \n{a} (a) \nDo widzenia (d)')
-                        key_input = util.key_pressed()    
+                        key_input = util.key_pressed()
                         if key_input == 'd':
                             ist_running = False
+                        #elif key_input == 't':
                         elif key_input == 'a':
                             x = x + 1
                             if x <= (len(characters[boards[player['board']]['characters'][0]]['dialogue'][boards[player['board']]['characters'][i]])) - 1:
@@ -496,5 +520,5 @@ def dialogue():
                         else:
                             pass
                 except KeyError:
-                    print() # I've got nothing to say
+                    print()  # I've got nothing to say
         i = i + 1
