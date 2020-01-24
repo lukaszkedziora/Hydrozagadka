@@ -1,7 +1,9 @@
+from termcolor import colored, cprint
 import util
 import ui
 import random
 # import time
+import csv
 
 
 player = {
@@ -23,7 +25,7 @@ player = {
 characters = {
     'jola': {
         'title': 'Pani Jola',
-        'pictogram': '⚥',
+        'pictogram': colored('⚥', 'magenta'),
         'status': True,
         'position': {
             'board1': [14, 15],
@@ -39,10 +41,11 @@ characters = {
     },
     'as': {
         'title': 'As',
-        'pictogram': '@',
+        'pictogram': colored('@', 'blue'),
         'position': {
             'board1': [2, 2],
-            'board2': [2, 2]
+            'board2': [2, 2],
+            'board3': [2, 2]
         },
         'dialogue': {
             'jola': {
@@ -77,7 +80,7 @@ characters = {
     'agenci': {
         'title': 'Agent',
         'status': False,
-        'pictogram': '☭',
+        'pictogram': colored('☭', 'yellow'),
         'position': {
             'board1': [9, 90],
             'board2': [9, 90]
@@ -91,8 +94,8 @@ characters = {
     },
     'kolega': {
         'title': 'Meterolog Janusz',
-        'pictogram': '☉',
-        'status': False,
+        'pictogram': colored('☉', 'cyan'),
+        'status': False, 
         'position': {
             'board1': [16, 11],
             'board2': [16, 11]
@@ -110,7 +113,7 @@ characters = {
     'informator': {
         'title': 'Informator ',
         'status': False,
-        'pictogram': '⚝',
+        'pictogram': colored('⚝', 'green'),
         'position': {
             'board1': [3, 93],
             'board2': [3, 93]
@@ -153,22 +156,20 @@ characters = {
     'maharadza': {
         'title': 'Maharadża Kaburu',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': colored('Ѿ', 'red'),
         'position': {
-            'board1': [3, 93],
-            'board2': [8, 82]
+          'board3': [9, 86]
         },
         'dialogue': {
             1: 'Witaj Janku',
         }
     },
     'plama': {
-        'title': 'doktur Plama',
+        'title': 'doktór Plama',
         'status': False,
-        'pictogram': '🐟',
-        'position': {
-            'board1': [3, 93],
-            'board2': [8, 82]
+        'pictogram': colored('ආ', 'yellow'),
+        'position': {    
+            'board3': [9, 84],
         },
         'dialogue': {
             1: 'Witaj Janku',
@@ -309,6 +310,14 @@ characters = {
             'board2': [8, 82]
         }
     },
+    'krokodyl': {
+        'title': 'krokodyl',
+        'pictogram': colored('ౠ', 'green'),
+        'status': False,
+        'position': {
+            'board3': [12, 55]
+        },
+    }      
 }
 
 boards = {
@@ -346,6 +355,17 @@ boards = {
         'characters': ['as', 'droznik', 'szefowa'],
         'bot': {
             'bot_fish': ['bot1', 'bot2', 'bot3', 'bot4', 'bot5']
+        }
+    },
+    'board3': {
+        'title': 'board3',
+        'items': {'Item1': [8, 6, colored('৩', "magenta")],
+                  'Item2': [10, 15, colored('♨', "cyan")],
+                },
+        'file': 'board3.txt',
+        'characters': ['as', 'maharadza', 'plama', 'krokodyl'],
+        'bot': {
+            
         }
     }
 }
@@ -483,7 +503,8 @@ def display_player_stats():
          player['inventory'].get('kamizelka'), ' ☂: ', player['inventory'].get('parasol'),\
              ' 🚬:', player['inventory'].get('winstony'), ' 🍾:', player['inventory'].get('alkohol'),\
                   ' 📰:', player['inventory'].get('epoca'))
-    print("+---------+  Help: shift + 1 | Credits: shift + 2 | q: exit")
+    print("|         |  Help: shift + 1 | Credits: shift + 2 | q: exit")
+    print("+---------+")
 
 
 def dialogue():
@@ -522,3 +543,25 @@ def dialogue():
                 except KeyError:
                     print()  # I've got nothing to say
         i = i + 1
+
+
+def modify_player_health(amount):
+    player['health'] += amount
+
+
+def read_pictures(filename):
+    with open(filename, 'r') as file: 
+        image = file.read()
+    return image
+
+
+def game_over():
+    print()
+    print(colored(read_pictures("grafiki/krokodyl.txt"), "green"), "\n\n")
+    print(colored(read_pictures("grafiki/game_over.txt"), "red"), "\n\n")   
+
+
+def winner():
+    print()
+    print(colored(read_pictures("grafiki/you_win.txt"), "magenta"), "\n\n")
+    print(colored("Brawo, pomogłeś Asowi uratować Warszawę :)", "red"), "\n\n")   
