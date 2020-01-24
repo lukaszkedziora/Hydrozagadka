@@ -32,7 +32,6 @@ def main():
                 board = engine.create_board(engine.player['board'])
                 engine.wsad(key, board)
                 engine.dialogue()
-
             else:
                 pass
             util.clear_screen()  
@@ -40,10 +39,6 @@ def main():
             util.clear_screen()
             engine.game_over()
             is_running = False
-        elif key == 'w' or 'd' or 's' or 'a':
-            board = engine.create_board(engine.player['board'])
-            engine.wsad(key, board)
-            engine.dialogue()  
         #elif key == '~':
         #    key_1 = input('Wpisz polecenie help lub kod specjalny') 
         else:
