@@ -156,7 +156,7 @@ characters = {
     'maharadza': {
         'title': 'Maharadża Kaburu',
         'status': False,
-        'pictogram': colored('Ѿ', 'red'),
+        'pictogram': colored('👳', 'red'),
         'position': {
           'board3': [9, 86]
         },
@@ -167,7 +167,7 @@ characters = {
     'plama': {
         'title': 'doktór Plama',
         'status': False,
-        'pictogram': colored('ආ', 'yellow'),
+        'pictogram': colored('👨', 'yellow'),
         'position': {    
             'board3': [9, 84],
         },
@@ -178,7 +178,7 @@ characters = {
     'bot1': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': colored('🐟', 'blue'),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -187,7 +187,7 @@ characters = {
     'bot2': {
         'title': 'bot2',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': colored('🐟', 'blue'),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -196,7 +196,7 @@ characters = {
     'bot3': {
         'title': 'bot3',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': colored('🐟', 'green'),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -205,7 +205,7 @@ characters = {
     'bot4': {
         'title': 'bot4',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': colored('🐟', 'cyan'),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -214,7 +214,7 @@ characters = {
     'bot5': {
         'title': 'bot5',
         'status': False,
-        'pictogram': '🐟',
+        'pictogram': colored('🐟', 'cyan'),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -223,7 +223,7 @@ characters = {
     'bot6': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '🐦',
+        'pictogram': colored('🐦', "yellow"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -232,7 +232,7 @@ characters = {
     'bot7': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '🐦',
+        'pictogram': colored('🐦', "blue"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -241,7 +241,7 @@ characters = {
     'bot8': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '🐦',
+        'pictogram': colored('🐦', "green"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -250,7 +250,7 @@ characters = {
     'bot9': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '🐦',
+        'pictogram': colored('🐦', "red"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -259,7 +259,7 @@ characters = {
     'bot10': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '🐦',
+        'pictogram': colored('🐦', "magenta"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -268,7 +268,7 @@ characters = {
         'bot11': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '⛅',
+        'pictogram': colored('⛅', "yellow"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -277,7 +277,7 @@ characters = {
     'bot12': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '⛅',
+        'pictogram': colored('⛅', "yellow"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -286,7 +286,7 @@ characters = {
     'bot13': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '⛅',
+        'pictogram': colored('⛅', "red"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -295,7 +295,7 @@ characters = {
     'bot14': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '⛅',
+        'pictogram': colored('⛅', "red"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -304,7 +304,7 @@ characters = {
     'bot15': {
         'title': 'bot1',
         'status': False,
-        'pictogram': '⛅',
+        'pictogram': colored('⛅', "yellow"),
         'position': {
             'board1': [3, 93],
             'board2': [8, 82]
@@ -312,7 +312,7 @@ characters = {
     },
     'krokodyl': {
         'title': 'krokodyl',
-        'pictogram': colored('ౠ', 'green'),
+        'pictogram': colored('🐊', 'green'),
         'status': False,
         'position': {
             'board3': [12, 55]
@@ -359,8 +359,8 @@ boards = {
     },
     'board3': {
         'title': 'board3',
-        'items': {'Item1': [8, 6, colored('৩', "magenta")],
-                  'Item2': [10, 15, colored('♨', "cyan")],
+        'items': {'Item1': [8, 5, colored('🍈', "magenta")],
+                  'Item2': [10, 15, colored('🍕', "cyan")],
                 },
         'file': 'board3.txt',
         'characters': ['as', 'maharadza', 'plama', 'krokodyl'],
