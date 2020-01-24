@@ -312,3 +312,4 @@ def winner():
     print()
     print(colored(read_pictures("grafiki/you_win.txt"), "magenta"), "\n\n")
     print(colored("Brawo, pomogłeś Asowi uratować Warszawę :)", "red"), "\n\n")   
+

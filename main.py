@@ -29,10 +29,11 @@ def main():
                 board = engine.create_board(engine.player['board'])
                 engine.wsad(key, board)
                 engine.dialogue()
+
             else:
                 pass
             util.clear_screen()  
-        elif engine.player['health'] <= 0:
+        if engine.player['health'] <= 0:
             util.clear_screen()
             engine.game_over()
             is_running = False
