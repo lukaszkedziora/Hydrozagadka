@@ -503,8 +503,9 @@ def display_player_stats():
          player['inventory'].get('kamizelka'), ' ☂: ', player['inventory'].get('parasol'),\
              ' 🚬:', player['inventory'].get('winstony'), ' 🍾:', player['inventory'].get('alkohol'),\
                   ' 📰:', player['inventory'].get('epoca'))
-    print("|         |  Help: shift + 1 | Credits: shift + 2 | q: exit")
+    print("|         |  Help: shift + 1 | Credits: shift + 2 | q: exit")            # !!! TO DO :(
     print("+---------+")
+
 
 
 def dialogue():
@@ -559,10 +560,25 @@ def game_over():
     print()
     print(colored(read_pictures("grafiki/krokodyl.txt"), "green"), "\n\n")
     print(colored(read_pictures("grafiki/game_over.txt"), "red"), "\n\n")   
+    print("Jeśli chcesz zagrać jeszcze raz, naciśnij x")
 
 
 def winner():
     print()
     print(colored(read_pictures("grafiki/you_win.txt"), "magenta"), "\n\n")
     print(colored("Brawo, pomogłeś Asowi uratować Warszawę :)", "red"), "\n\n")   
+
+
+def help_screen():
+    print()
+    print(colored(read_pictures("grafiki/logo.txt"), "blue"), "\n\n")
+    print(read_pictures("grafiki/help.txt"), "\n")
+      
+
+def credits_screen():
+    print()
+    print(colored(read_pictures("grafiki/logo.txt"), "magenta"), "\n\n")
+    print("Twórcami gry są: Łukasz Kędziora, Radek Szczepanik i Natalia Krygier.\n\n")
+    print("Powodzenia! :)\n")
+
 

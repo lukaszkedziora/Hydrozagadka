@@ -2,7 +2,7 @@ import util
 import engine
 import ui
 from termcolor import colored, cprint
-# import time           MOZE SIE PRZYDAC DO DIALOGOW
+import time
 
 
 def create_player():
@@ -25,6 +25,7 @@ def main():
         engine.display_player_stats()
         
         key = util.key_pressed()    
+
         if engine.player['health'] > 0:
             if key == 'q':
                 is_running = False
@@ -34,20 +35,25 @@ def main():
                 engine.dialogue()
             else:
                 pass
-            util.clear_screen()  
+            util.clear_screen() 
+        if key == '!':          
+            engine.help_screen()
+            time.sleep(6)
+        if key == '@':          
+            engine.credits_screen()
+            time.sleep(3)
+        if key == '~':
+            special_code = input('Wpisz kod specjalny: ') 
+            if special_code == "bossfight":
+                engine.player['board'] = 'board3'
         if engine.player['health'] <= 0:
             util.clear_screen()
             engine.game_over()
             is_running = False
-        #elif key == '~':
-        #    key_1 = input('Wpisz polecenie help lub kod specjalny') 
         else:
             util.clear_screen()
 
-
- 
-
-            
+         
 
 if __name__ == '__main__':
     main()
