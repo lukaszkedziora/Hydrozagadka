@@ -38,14 +38,19 @@ def main():
             util.clear_screen() 
         if key == '!':          
             engine.help_screen()
-            time.sleep(6)
+            time.sleep(2)
         if key == '@':          
             engine.credits_screen()
-            time.sleep(3)
+            time.sleep(2)
+        if key == '$':          
+            engine.winner()
+            time.sleep(2)
         if key == '~':
             special_code = input('Wpisz kod specjalny: ') 
             if special_code == "bossfight":
                 engine.player['board'] = 'board3'
+            if special_code == "startover":
+                engine.player['board'] = 'board1'
         if engine.player['health'] <= 0:
             util.clear_screen()
             engine.game_over()
